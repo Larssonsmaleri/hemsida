@@ -290,6 +290,18 @@ form.offer{border-radius:4px;padding:36px}
 
 /* handwritten LME mark (stand-in font until the real logo file arrives) */
 .hand{font-family:"Covered By Your Grace","Segoe Script","Bradley Hand",cursive;font-weight:400;letter-spacing:.02em}
+.wall-paint{position:absolute;inset:0;width:100%;height:100%;display:block;animation:paintcycle 14s linear infinite}
+.wall-paint .pt{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.wall-paint .roll{stroke:#EE7203;stroke-width:96;stroke-linecap:butt;animation:p-roll 14s linear infinite}
+.wall-paint .lme .pt{stroke:#fff;stroke-width:17}
+.wall-paint .l1{animation:p-l1 14s linear infinite}.wall-paint .l2{animation:p-l2 14s linear infinite}.wall-paint .l3{animation:p-l3 14s linear infinite}.wall-paint .l4{animation:p-l4 14s linear infinite}
+@keyframes paintcycle{0%,95%{opacity:1}100%{opacity:0}}
+@keyframes p-roll{0%,2%{stroke-dashoffset:1}22%,100%{stroke-dashoffset:0}}
+@keyframes p-l1{0%,25%{stroke-dashoffset:1}29%,100%{stroke-dashoffset:0}}
+@keyframes p-l2{0%,30.5%{stroke-dashoffset:1}37.5%,100%{stroke-dashoffset:0}}
+@keyframes p-l3{0%,39%{stroke-dashoffset:1}44%,100%{stroke-dashoffset:0}}
+@keyframes p-l4{0%,45%{stroke-dashoffset:1}46.5%,100%{stroke-dashoffset:0}}
+.wall:has(img.wall-media,video.wall-media:not([hidden])) .wall-paint{display:none}
 @keyframes handwipe{from{clip-path:inset(-20% 100% -20% 0)}to{clip-path:inset(-20% -10% -20% 0)}}
 .wall-mark.hand{inset:0;display:grid;place-items:center;font:400 clamp(6rem,12vw,10.5rem)/.9 "Covered By Your Grace","Segoe Script","Bradley Hand",cursive;letter-spacing:.02em;transform:rotate(-7deg);animation:handwipe 1.1s .5s cubic-bezier(.6,0,.2,1) backwards}
 .wall:has(img.wall-media,video.wall-media:not([hidden])) .wall-mark.hand{inset:auto auto 18px 24px;display:block;font-size:clamp(2.6rem,5vw,3.6rem);text-shadow:0 2px 14px rgba(0,0,0,.45)}
@@ -347,7 +359,17 @@ form.offer{border-radius:4px;padding:36px}
       </div>
       <div class="wall" aria-hidden="true">
         <div class="stroke k1"></div><div class="stroke k2"></div><div class="stroke k3"></div><div class="stroke k4"></div>
-        <div class="wall-mark hand">LME</div>
+        <svg class="wall-paint" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="LME målas på en orange vägg">
+          <defs><filter id="pensel" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></defs>
+          <rect width="400" height="400" fill="#E7E1D6"/>
+          <path class="pt roll" pathLength="1" filter="url(#pensel)" d="M-10,470 L-10,-70 L35,470 L35,-70 L35,470 L110,-70 L110,470 L185,-70 L185,470 L260,-70 L260,470 L335,-70 L335,470 L400,-70 L400,470"/>
+          <g class="lme" filter="url(#pensel)" transform="rotate(-8 200 200)">
+            <path class="pt l1" pathLength="1" d="M84,150 L93,250 L138,238"/>
+            <path class="pt l2" pathLength="1" d="M160,246 L166,150 L198,214 L234,140 L242,240"/>
+            <path class="pt l3" pathLength="1" d="M318,134 L274,144 L280,238 L324,228"/>
+            <path class="pt l4" pathLength="1" d="M278,190 L310,183"/>
+          </g>
+        </svg>
         <img class="wall-media" src="bilder/kevin.jpg" alt="Kevin Larsson, målare på LM&amp;E" onerror="this.remove()">
         <video class="wall-media" src="bilder/film.mp4" autoplay muted loop playsinline hidden onloadeddata="this.hidden=false"></video>
         <span class="wall-note">Plats för er film eller bild från ett jobb</span>
