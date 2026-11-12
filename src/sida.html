@@ -291,9 +291,10 @@ form.offer{border-radius:4px;padding:36px}
 /* handwritten LME mark (stand-in font until the real logo file arrives) */
 .hand{font-family:"Covered By Your Grace","Segoe Script","Bradley Hand",cursive;font-weight:400;letter-spacing:.02em}
 .wall-paint{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wall:has(.wall-paint)::after{content:"";position:absolute;inset:0;border:1px solid #EE7203;border-radius:inherit;pointer-events:none;z-index:4}
 .wall-paint .pt{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1.5;stroke-dashoffset:0;animation-duration:16s;animation-iteration-count:infinite;animation-timing-function:linear}
-.wall-paint .roll{stroke:#EE7203;stroke-width:78;stroke-linecap:butt}
-.wall-paint .lme .pt{stroke:#FCF8F1;stroke-width:14}
+.wall-paint .roll{stroke:#0C0C0B;stroke-width:78;stroke-linecap:butt}
+.wall-paint .lme .pt{stroke:#fff;stroke-width:14}
 .wall-paint .cover{opacity:0;animation:p-cover 16s linear infinite}
 @keyframes p-cover{0%,93%{opacity:0}99%,100%{opacity:1}}
 .wall-paint .r0{animation-name:p-r0}
@@ -374,7 +375,7 @@ form.offer{border-radius:4px;padding:36px}
       </div>
       <div class="wall" aria-hidden="true">
         <div class="stroke k1"></div><div class="stroke k2"></div><div class="stroke k3"></div><div class="stroke k4"></div>
-        <svg class="wall-paint" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="LME målas på en orange vägg">
+        <svg class="wall-paint" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="LME målas i vitt på en svart vägg">
           <defs>
             <filter id="roller" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".012 .09" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7"/></filter>
             <filter id="pensel" x="-8%" y="-8%" width="116%" height="116%">
@@ -385,9 +386,9 @@ form.offer{border-radius:4px;padding:36px}
               <feComposite in="d" in2="gap" operator="in"/>
             </filter>
             <filter id="korn"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.12"/></filter>
-            <radialGradient id="ljus" cx="28%" cy="18%" r="95%"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#3a1500" stop-opacity=".3"/></radialGradient>
+            <radialGradient id="ljus" cx="28%" cy="18%" r="95%"><stop offset="0" stop-color="#fff" stop-opacity=".09"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#3a1500" stop-opacity=".3"/></radialGradient>
           </defs>
-          <rect width="400" height="400" fill="#1C1A18"/>
+          <rect width="400" height="400" fill="#EE7203"/>
           <g filter="url(#roller)">
           <path class="pt roll r0" pathLength="1" d="M33,-60 L33,460"/>
           <path class="pt roll r1" pathLength="1" d="M100,460 L100,-60"/>
@@ -404,7 +405,7 @@ form.offer{border-radius:4px;padding:36px}
             <path class="pt l3" pathLength="1" d="M318,134 Q294,138 274,144 Q275,192 281,238 Q304,234 324,227"/>
             <path class="pt l4" pathLength="1" d="M279,190 Q296,186 311,183"/>
           </g>
-          <rect class="cover" width="400" height="400" fill="#1C1A18"/>
+          <rect class="cover" width="400" height="400" fill="#EE7203"/>
         </svg>
         <img class="wall-media" src="bilder/kevin.jpg" alt="Kevin Larsson, målare på LM&amp;E" onerror="this.remove()">
         <video class="wall-media" src="bilder/film.mp4" autoplay muted loop playsinline hidden onloadeddata="this.hidden=false"></video>
