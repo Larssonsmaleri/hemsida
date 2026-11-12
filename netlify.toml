@@ -1,0 +1,3 @@
+# Netlify publicerar bara mappen public. Inget byggsteg behövs.
+[build]
+  publish = "public"

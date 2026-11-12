@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.larssonsmaleriservice.se/sitemap.xml
