@@ -315,6 +315,7 @@ form.offer{border-radius:4px;padding:36px}
 .job-facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 28px;border-top:1px solid var(--ink);padding-top:22px}
 .job-facts dt{font:500 .7rem/1.6 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .job-facts dd{margin:0;font-weight:500}
+@media (min-width:901px){.job-flip .job-media{order:2}}
 @media (max-width:900px){.job{grid-template-columns:1fr;gap:32px;margin-bottom:76px}}
 </style>
 
@@ -403,8 +404,8 @@ form.offer{border-radius:4px;padding:36px}
       </div>
       <article class="job">
         <div class="job-media">
-          <div class="job-main"><img id="job-img" src="bilder/karla-1.jpg" alt="Lounge med valvfönster mot Birger Jarlsgatan" width="1000" height="1250" onerror="this.remove()"></div>
-          <div class="job-thumbs" id="job-thumbs">
+          <div class="job-main"><img class="job-img" src="bilder/karla-1.jpg" alt="Lounge med valvfönster mot Birger Jarlsgatan" width="1000" height="1250" onerror="this.remove()"></div>
+          <div class="job-thumbs">
             <button type="button" data-src="bilder/karla-1.jpg" data-alt="Lounge med valvfönster mot Birger Jarlsgatan" aria-current="true" aria-label="Visa bild 1 av 6"><img src="bilder/karla-1.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
             <button type="button" data-src="bilder/karla-2.jpg" data-alt="Översikt över kontoret med parkettgolv" aria-label="Visa bild 2 av 6"><img src="bilder/karla-2.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
             <button type="button" data-src="bilder/karla-3.jpg" data-alt="Mötesrummet sett genom glasdörrarna" aria-label="Visa bild 3 av 6"><img src="bilder/karla-3.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
@@ -423,6 +424,29 @@ form.offer{border-radius:4px;padding:36px}
             <dt>Arbete</dt><dd>Renovering och målning av hela lokalen</dd>
           </dl>
           <div><a class="btn btn-primary" href="#kontakt" data-svc="Kontor och lokaler">Begär offert på ett liknande jobb</a></div>
+        </div>
+      </article>
+      <article class="job job-flip">
+        <div class="job-media">
+          <div class="job-main"><img class="job-img" src="bilder/rorstrandsgatan-1.jpg" alt="Röd hall med målade skåp och garderober" width="1000" height="1250" loading="lazy" onerror="this.remove()"></div>
+          <div class="job-thumbs">
+            <button type="button" data-src="bilder/rorstrandsgatan-1.jpg" data-alt="Röd hall med målade skåp och garderober" aria-current="true" aria-label="Visa bild 1 av 4"><img src="bilder/rorstrandsgatan-1.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
+            <button type="button" data-src="bilder/rorstrandsgatan-2.jpg" data-alt="Hallen sedd från entrén" aria-label="Visa bild 2 av 4"><img src="bilder/rorstrandsgatan-2.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
+            <button type="button" data-src="bilder/rorstrandsgatan-3.jpg" data-alt="Det platsbyggda skåpet målat i samma röda kulör" aria-label="Visa bild 3 av 4"><img src="bilder/rorstrandsgatan-3.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
+            <button type="button" data-src="bilder/rorstrandsgatan-4.jpg" data-alt="Nisch med hyllor i samma röda kulör" aria-label="Visa bild 4 av 4"><img src="bilder/rorstrandsgatan-4.jpg" alt="" loading="lazy" onerror="this.closest('button').remove()"></button>
+          </div>
+        </div>
+        <div class="job-copy">
+          <span class="eyebrow">Lägenhet · Rörstrandsgatan</span>
+          <h3>Röd hall i Vasastan</h3>
+          <p class="sub">En hall där allt går i samma röda kulör: väggar, tak, garderober och det gamla platsbyggda skåpet. Vi målade väggar, tak och snickerier i lägenheten, med färg från Farrow &amp; Ball rakt igenom.</p>
+          <dl class="job-facts">
+            <dt>Plats</dt><dd>Rörstrandsgatan, Vasastan</dd>
+            <dt>Typ</dt><dd>Lägenhet</dd>
+            <dt>Arbete</dt><dd>Målning av väggar, tak och snickerier</dd>
+            <dt>Färg</dt><dd>Farrow &amp; Ball</dd>
+          </dl>
+          <div><a class="btn btn-primary" href="#kontakt" data-svc="Målning invändigt">Begär offert på ett liknande jobb</a></div>
         </div>
       </article>
     </div>
@@ -570,8 +594,7 @@ form.offer{border-radius:4px;padding:36px}
   }
   [$('arbete'),$('material'),...document.querySelectorAll('input[name=pers]')].forEach(el=>el.addEventListener('input',calc));
   calc();
-  const jt=$('job-thumbs'),ji=$('job-img');
-  if(jt&&ji)jt.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ji.src=b.dataset.src;ji.alt=b.dataset.alt;jt.querySelectorAll('button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true')});
+  document.querySelectorAll('.job').forEach(j=>{const jt=j.querySelector('.job-thumbs'),ji=j.querySelector('.job-img');if(!jt||!ji)return;jt.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ji.src=b.dataset.src;ji.alt=b.dataset.alt;jt.querySelectorAll('button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true')})});
   document.querySelectorAll('[data-svc]').forEach(b=>b.addEventListener('click',()=>{
     $('f-svc').value=b.dataset.svc;
     $('kontakt').scrollIntoView();
