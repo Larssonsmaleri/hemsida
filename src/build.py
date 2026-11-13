@@ -23,7 +23,7 @@ rep('<span class="tel">0730-57 98 55</span>','<a class="tel" href="tel:+46730579
 rep('<span class="v tel">0730-57 98 55</span>','<a class="v tel" href="tel:+46730579855" style="text-decoration:none">0730-57 98 55</a>')
 rep('href="tel:0730579855"','href="tel:+46730579855"')
 rep('<span class="v">kevin@larssonsmaleriservice.se</span>','<a class="v" href="mailto:kevin@larssonsmaleriservice.se" style="text-decoration:none">kevin@larssonsmaleriservice.se</a>')
-rep('<form class="offer" id="offer" novalidate>','<form class="offer" id="offer" name="offert" method="POST" data-netlify="true" netlify-honeypot="webbplats" novalidate>\n        <input type="hidden" name="form-name" value="offert">\n        <p hidden><label>Lämna tomt: <input name="webbplats"></label></p>')
+rep('<form class="offer" id="offer" novalidate>','<form class="offer" id="offer" name="offert" method="POST" action="https://formsubmit.co/kevin@larssonsmaleriservice.se" novalidate>\n        <input type="hidden" name="_subject" value="Ny offertförfrågan från hemsidan">\n        <input type="hidden" name="_template" value="table">\n        <input type="hidden" name="_captcha" value="false">\n        <p hidden><label>Lämna tomt: <input name="_honey"></label></p>')
 for fid,nm in [('f-svc','tjanst'),('f-namn','namn'),('f-tel','telefon'),('f-mejl','epost'),('f-ort','adress'),('f-msg','beskrivning')]:
     rep(f'id="{fid}"',f'id="{fid}" name="{nm}"')
 rep('<p class="ok" id="ok" hidden>Det här är ett förslag på ny hemsida. Formuläret kopplas till er mejl när sidan går live.</p>','<p class="ok" id="ok" hidden>Tack! Vi har fått din förfrågan och ringer upp dig.</p>\n        <p class="fine" id="fail" hidden>Det gick inte att skicka just nu. Ring oss på 0730-57 98 55 så hjälper vi dig direkt.</p>')
@@ -35,8 +35,9 @@ new="""  $('offer').addEventListener('submit',async e=>{
     if(!ok)return;
     const btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Skickar…';
     try{
-      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()});
-      if(!r.ok)throw new Error(r.status);
+      const r=await fetch('https://formsubmit.co/ajax/kevin@larssonsmaleriservice.se',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||String(j.success)!=='true')throw new Error(r.status);
       f.reset();$('ok').hidden=false;
     }catch(_){$('fail').hidden=false}
     btn.disabled=false;btn.textContent='Skicka förfrågan';

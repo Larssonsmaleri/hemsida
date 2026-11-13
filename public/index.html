@@ -612,9 +612,11 @@ form.offer{border-radius:4px;padding:36px}
         <div class="ci"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/larssonsmaleriservice/" target="_blank" rel="noopener" style="text-decoration:none">@larssonsmaleriservice</a></div>
         <div class="ci"><span class="k">Adress</span><span class="v">Tollareslingan 50, 132 49 Saltsjö-Boo</span></div>
       </div>
-      <form class="offer" id="offer" name="offert" method="POST" data-netlify="true" netlify-honeypot="webbplats" novalidate>
-        <input type="hidden" name="form-name" value="offert">
-        <p hidden><label>Lämna tomt: <input name="webbplats"></label></p>
+      <form class="offer" id="offer" name="offert" method="POST" action="https://formsubmit.co/kevin@larssonsmaleriservice.se" novalidate>
+        <input type="hidden" name="_subject" value="Ny offertförfrågan från hemsidan">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <p hidden><label>Lämna tomt: <input name="_honey"></label></p>
         <div class="field"><label for="f-svc">Välj tjänst</label>
           <select id="f-svc" name="tjanst">
             <option value="">Välj tjänst</option>
@@ -679,8 +681,9 @@ form.offer{border-radius:4px;padding:36px}
     if(!ok)return;
     const btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Skickar…';
     try{
-      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()});
-      if(!r.ok)throw new Error(r.status);
+      const r=await fetch('https://formsubmit.co/ajax/kevin@larssonsmaleriservice.se',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||String(j.success)!=='true')throw new Error(r.status);
       f.reset();$('ok').hidden=false;
     }catch(_){$('fail').hidden=false}
     btn.disabled=false;btn.textContent='Skicka förfrågan';
